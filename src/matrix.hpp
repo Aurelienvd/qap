@@ -2,7 +2,6 @@
 #define __MATRIX_HPP
 
 #include <vector>
-#include <string>
 #include <iostream>
 
 // Square matrix of size `size`.
@@ -14,10 +13,13 @@ class Matrix {
 		std::vector<int> mat;
 
 	public:
+		Matrix() = default;
 		Matrix(std::size_t n);
 
 		const int& getElem(int i, int j) const;
 		void setElem(int i, int j, int elem);
+
+		void resize(std::size_t newsize);
 		
 		void print() const;
 };
