@@ -1,0 +1,16 @@
+# Ignore gedit files
+*~
+
+#Ignore c++ obj files
+*.o
+
+#Ignore exe
+src/qap
+
+# Ignore latex files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
