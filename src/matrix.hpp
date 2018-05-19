@@ -15,6 +15,9 @@ class Matrix {
 
 	public:
 		Matrix(std::size_t n);
+
+		const int& getElem(int i, int j) const;
+		void setElem(int i, int j, int elem);
 		
 		void print() const;
 };

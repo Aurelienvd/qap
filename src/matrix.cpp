@@ -2,6 +2,13 @@
 
 Matrix::Matrix(std::size_t n): size(n), mat(std::vector<int>(n*n, 0)){}
 
+const int& Matrix::getElem(int i, int j) const{
+	return mat[i*size+j];
+}
+
+void Matrix::setElem(int i, int j, int elem){
+	mat[i*size+j] = elem;
+}
 
 void Matrix::print() const{
 	unsigned int count = 0;
@@ -13,4 +20,5 @@ void Matrix::print() const{
 			count = 0;
 		}
 	}
+	std::cout << std::endl;
 }
