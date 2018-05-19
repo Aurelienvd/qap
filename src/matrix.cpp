@@ -12,6 +12,7 @@ void Matrix::setElem(int i, int j, int elem){
 
 void Matrix::resize(std::size_t newsize){
 	mat.resize(newsize*newsize);
+	size = newsize;
 }
 
 void Matrix::print() const{

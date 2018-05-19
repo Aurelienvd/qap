@@ -1,15 +1,13 @@
 #include <iostream>
 #include <cstdlib>
 #include "matrix.hpp"
+#include "instance.hpp"
 
 int main(int argc, char** argv){
 
-	Matrix mat(3);
-	mat.print();
-
-	mat.setElem(1,1, 5);
-	mat.print();
-	std::cout << mat.getElem(1,2) << std::endl;
+	Instance instance("had14.dat");
+	instance.distance.print();
+	instance.flow.print();
 	
 	return EXIT_SUCCESS;
 }

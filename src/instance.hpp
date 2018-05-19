@@ -1,20 +1,23 @@
 #ifndef __INSTANCE_HPP
 #define __INSTANCE_HPP
 
-#include <iostream>
+#include <fstream>
 #include <string>
 
 #include "matrix.hpp"
+#include "constants.hpp"
 
 class Instance{
-
+	
 	private:
-		Matrix distance;
-		Matrix flow;
-
+		void initMatrix(std::ifstream& in, Matrix& mat, std::size_t n);
 		void readMatricesFromFile(std::string filename);
 
 	public:
+		Matrix distance;
+		Matrix flow;
+
+		Instance() = default;
 		Instance(std::string filename);
 };
 
