@@ -15,7 +15,7 @@ class Instance{
 	private:
 		void initMatrix(std::ifstream& in, Matrix& mat, std::size_t n);
 		void readMatricesFromFile(std::string filename);
-		Table tableFromVector(std::vector<int> assignment) const;
+		Table tableFromVector(std::vector<int>& assignment) const;
 
 	public:
 		Matrix distance;
@@ -24,7 +24,7 @@ class Instance{
 		Instance() = default;
 		Instance(std::string filename);
 
-		long evaluateSolution(std::vector<int> assignment) const;
+		long evaluateSolution(std::vector<int>& assignment) const;
 };
 
 
