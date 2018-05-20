@@ -5,6 +5,8 @@
 #include "ant.hpp"
 #include "instance.hpp"
 
+typedef std::vector<std::vector<double>> DoubleMatrix;
+
 class Colony {
 
 	private:

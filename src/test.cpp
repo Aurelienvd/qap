@@ -5,7 +5,7 @@
 #include "utils.hpp"
 
 void testMatrix(){
-	Matrix mat(3);
+	Matrix<int> mat(3);
 	mat.print();
 
 	mat.setElem(1,1, 5);

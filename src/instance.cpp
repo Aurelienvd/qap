@@ -5,7 +5,7 @@ Instance::Instance(std::string filename){
 	readMatricesFromFile(filename);
 }
 
-void Instance::initMatrix(std::ifstream& in, Matrix& mat, std::size_t n){
+void Instance::initMatrix(std::ifstream& in, Matrix<int>& mat, std::size_t n){
 	int elem;
 	for (unsigned int i = 0; i < n; i++){
 		for (unsigned int j = 0; j < n; j++){

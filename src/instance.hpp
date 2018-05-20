@@ -13,13 +13,13 @@ typedef std::unordered_map<int, int> Table;
 class Instance{
 	
 	private:
-		void initMatrix(std::ifstream& in, Matrix& mat, std::size_t n);
+		void initMatrix(std::ifstream& in, Matrix<int>& mat, std::size_t n);
 		void readMatricesFromFile(std::string filename);
 		Table tableFromVector(std::vector<int>& assignment) const;
 
 	public:
-		Matrix distance;
-		Matrix flow;
+		Matrix<int> distance;
+		Matrix<int> flow;
 
 		Instance() = default;
 		Instance(std::string filename);

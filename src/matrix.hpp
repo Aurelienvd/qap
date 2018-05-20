@@ -4,25 +4,49 @@
 #include <vector>
 #include <iostream>
 
-// Square matrix of size `size`.
+// size*size matrix with numerical values.
 
+template <typename Num>
 class Matrix {
 
 	private:
 		std::size_t size;
-		std::vector<int> mat;
+		std::vector<Num> mat;
 
 	public:
 		Matrix() = default;
-		Matrix(std::size_t n);
+		Matrix(std::size_t n): size(n), mat(std::vector<Num>(n*n, 0)){}
 
-		const int& getElem(int i, int j) const;
-		void setElem(int i, int j, int elem);
-		unsigned int getSize() const;
+		const Num& getElem(int i, int j) const{
+			return mat[i*size+j];
+		}
 
-		void resize(std::size_t newsize);
+
+		void setElem(int i, int j, Num elem){
+			mat[i*size+j] = elem;
+		}
+
+		unsigned int getSize() const{
+			return size;
+		}
+
+		void resize(std::size_t newsize){
+			mat.resize(newsize*newsize);
+			size = newsize;
+		}
 		
-		void print() const;
+		void print() const{
+			unsigned int count = 0;
+			for (auto elem : mat){
+				std::cout << elem << " ";
+				count++;
+				if (count == size){
+					std::cout << std::endl;
+					count = 0;
+				}
+			}
+			std::cout << std::endl;
+		}
 };
 
 
