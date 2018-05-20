@@ -35,6 +35,10 @@ Table Instance::tableFromVector(std::vector<int>& assignment) const{
 	return table;
 }
 
+unsigned int Instance::getSize() const{
+	return distance.getSize();
+}
+
 long Instance::evaluateSolution(std::vector<int>& assignment) const{
 	Table mapping = tableFromVector(assignment);
 	long score = 0;

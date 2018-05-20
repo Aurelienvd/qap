@@ -18,6 +18,7 @@ class Matrix {
 
 		const int& getElem(int i, int j) const;
 		void setElem(int i, int j, int elem);
+		unsigned int getSize() const;
 
 		void resize(std::size_t newsize);
 		

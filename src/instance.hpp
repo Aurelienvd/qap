@@ -24,6 +24,7 @@ class Instance{
 		Instance() = default;
 		Instance(std::string filename);
 
+		unsigned int getSize() const;
 		long evaluateSolution(std::vector<int>& assignment) const;
 };
 

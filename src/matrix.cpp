@@ -10,6 +10,10 @@ void Matrix::setElem(int i, int j, int elem){
 	mat[i*size+j] = elem;
 }
 
+unsigned int Matrix::getSize() const{
+	return size;
+}
+
 void Matrix::resize(std::size_t newsize){
 	mat.resize(newsize*newsize);
 	size = newsize;
