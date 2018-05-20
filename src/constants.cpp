@@ -1,3 +1,3 @@
 namespace io{
-	extern const char* DIR = "../instances/";
+	const char* DIR = "../instances/";
 }
