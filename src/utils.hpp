@@ -12,5 +12,15 @@ void printVec(std::vector<T> vec){
 	std::cout << std::endl;
 }
 
+template <class InputIt, class T, class BinaryOperation>
+void inplace_scanl(InputIt first, InputIt last, T init, BinaryOperation op){
+	auto val = init;
+	for(auto current = first; current != last; ++current){
+		*current = op(val, *current);
+		val = *current == 0 ? val : *current;		
+	}
+}
+
+
 
 #endif /* __UTILS_HPP */

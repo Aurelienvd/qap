@@ -34,6 +34,23 @@ void testMatrix(){
 	}
 }
 
+void testUtils(){
+	std::vector<int> v1 = {1,2,3,4,5,6,7,8,9,10};
+
+	inplace_scanl(v1.begin(), v1.end(), 0, [](int acc, int val){
+		if (val%2 == 0){
+			return acc+val;
+		}
+		return 0;
+	});
+	if (*(v1.end()-1) == 30){
+		std::cout << "inplace_scanl: OK" << std::endl;
+	} else{
+		std::cout << "inplace_scanl: NOK" << std::endl;
+	}
+	
+}
+
 void testInstance(){
 	Instance instance("example.dat");
 	instance.distance.print();
@@ -54,15 +71,23 @@ void testInstance(){
 
 void testColony(){
 	Instance instance("example.dat");
-	Colony colony(&instance, 10, 0.8);
+	Colony colony(&instance, 10, 0.8, 1337);
 	colony.initializeHeuristic();
+	colony.computeProbabilities(1.0, 1.0);
 
 	colony.getHeuristicMatrix().print();
+	std::cout<<std::endl;
+	colony.getProbabilitiesMatrix().print();
 }
 
 int main(int argc, char** argv){
+	std::cout << "\nTest Unit: Matrix class\n" << std::endl;
 	testMatrix();
+	std::cout << "\nTest Unit: Utils module\n" << std::endl;
+	testUtils();
+	std::cout << "\nTest Unit: Instance class\n" << std::endl;
 	testInstance();
+	std::cout << "\nTest Unit: Colony class\n" << std::endl;
 	testColony();
 	
 	return EXIT_SUCCESS;
