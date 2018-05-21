@@ -71,13 +71,15 @@ void testInstance(){
 
 void testColony(){
 	Instance instance("example.dat");
-	Colony colony(&instance, 10, 0.8, 1337);
+	Colony colony(&instance, 1, 0.8, 1337);
 	colony.initializeHeuristic();
 	colony.computeProbabilities(1.0, 1.0);
 
 	colony.getHeuristicMatrix().print();
 	std::cout<<std::endl;
 	colony.getProbabilitiesMatrix().print();
+
+	colony.iterate();
 }
 
 int main(int argc, char** argv){

@@ -4,7 +4,7 @@
 Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed): instance(inst){
 	auto rg = std::make_shared<std::mt19937>(seed);
 	for (int i = 0; i < size; i++){
-		ants.push_back(Ant(inst, rg, probabilities, heuristic));
+		ants.push_back(Ant(inst, rg, &probabilities, &heuristic));
 	}
 	pheromones.resize(instance->getSize());
 	heuristic.resize(instance->getSize());
@@ -49,5 +49,11 @@ void Colony::computeProbabilities(double alpha, double beta){
 		for (unsigned int j = 0; j < instance->getSize(); j++){
 			probabilities.setElem(i,j, std::pow(pheromones.getElem(i,j), alpha)*std::pow(heuristic.getElem(i,j), beta));
 		}
+	}
+}
+
+void Colony::iterate(){
+	for (auto ant : ants){
+		ant.constructSolution();
 	}
 }

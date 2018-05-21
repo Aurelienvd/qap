@@ -21,8 +21,8 @@ class Ant{
 		Assignment solution;
 		Instance* instance;
 		RandomGenerator gen;
-		Matrix<double> probabilities;
-		Matrix<double> heuristic;
+		Matrix<double>* probabilities;
+		Matrix<double>* heuristic;
 
 		void clearSolution();
 		void assignBestLocation(int facility, std::vector<bool>& locationFree);
@@ -30,7 +30,7 @@ class Ant{
 
 	public:
 
-		Ant(Instance* inst, RandomGenerator rg, Matrix<double>& proba, Matrix<double>& h);
+		Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h);
 
 		void constructSolution();
 		const Assignment& getSolution() const;

@@ -1,6 +1,6 @@
 #include "ant.hpp"
 
-Ant::Ant(Instance* inst, RandomGenerator rg, Matrix<double>& proba, Matrix<double>& h): instance(inst), gen(rg), probabilities(proba), heuristic(h){
+Ant::Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h): instance(inst), gen(rg), probabilities(proba), heuristic(h){
 	solution.resize(instance->getSize());
 }
 
@@ -15,7 +15,7 @@ const std::vector<int>& Ant::getSolution() const{
 void Ant::assignBestLocation(int facility, std::vector<bool>& locationFree) {
 	int index = 0;
 	double minimum = DBL_MAX;
-	auto weights = heuristic.getLine(facility);
+	auto weights = heuristic->getLine(facility);
 
 	for (unsigned int i = 0; i < instance->getSize(); i++){
 		if (weights[i] < minimum){
@@ -30,7 +30,7 @@ void Ant::assignBestLocation(int facility, std::vector<bool>& locationFree) {
 * scanl function defined in "utils.hpp".
 */
 void Ant::assignFacility(int facility, std::vector<bool>& locationFree){
-	auto proba = probabilities.getLine(facility);
+	auto proba = probabilities->getLine(facility);
 	double sumProb, p = 0.0;
 	int i = -1;
 
@@ -58,7 +58,6 @@ void Ant::assignFacility(int facility, std::vector<bool>& locationFree){
 
 void Ant::constructSolution(){
 	clearSolution();
-	
 	std::vector<int> unassignedFacilities(instance->getSize(), -1);
 	std::vector<bool> locationFree(instance->getSize(), true);
 	std::iota(unassignedFacilities.begin(), unassignedFacilities.end(), 0);
@@ -72,4 +71,5 @@ void Ant::constructSolution(){
 
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
+	locationFree.at(1000);
 }

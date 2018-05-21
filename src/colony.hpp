@@ -29,6 +29,7 @@ class Colony {
 
 		void initializeHeuristic();
 		void computeProbabilities(double alpha, double beta);
+		void iterate();
 };
 
 #endif /* __COLONY_HPP */
