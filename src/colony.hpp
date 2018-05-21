@@ -5,18 +5,18 @@
 #include "ant.hpp"
 #include "instance.hpp"
 
-typedef std::vector<std::vector<double>> DoubleMatrix;
-
 class Colony {
 
 	private:
 
 		Instance* instance;
 		std::vector<Ant> ants;
+		Matrix<double> pheromones;
+		Matrix<double> heuristic;
 
 	public:
 
-		Colony(Instance* inst, int size);
+		Colony(Instance* inst, int size, double initial_pheromone);
 };
 
 #endif /* __COLONY_HPP */

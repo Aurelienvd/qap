@@ -26,6 +26,10 @@ class Matrix {
 			mat[i*size+j] = elem;
 		}
 
+		void setAllElem(Num elem){
+			mat.assign(mat.size(), elem);
+		}
+
 		unsigned int getSize() const{
 			return size;
 		}
