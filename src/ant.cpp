@@ -18,11 +18,12 @@ void Ant::assignBestLocation(int facility, std::vector<bool>& locationFree) {
 	auto weights = heuristic->getLine(facility);
 
 	for (unsigned int i = 0; i < instance->getSize(); i++){
-		if (weights[i] < minimum){
+		if (locationFree[i] && weights[i] < minimum){
 			minimum = weights[i];
 			index = i;
 		}
 	}
+	locationFree[index] = false;
 	solution[index] = facility;
 }
 
@@ -52,6 +53,7 @@ void Ant::assignFacility(int facility, std::vector<bool>& locationFree){
 		while (p > selectionProbability[i]){
 			i++;
 		}
+		locationFree[i] = false;
 		solution[i] = facility;
 	}
 }
@@ -71,5 +73,4 @@ void Ant::constructSolution(){
 
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
-	locationFree.at(1000);
 }
