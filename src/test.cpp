@@ -15,6 +15,8 @@ void testMatrix(){
 		std::cout << "Matrix setElem: NOK" << std::endl;
 	}
 
+	printVec(mat.getLine(1));
+
 	mat.setAllElem(7);
 	bool valid = true;
 	for (unsigned int i = 0; i < mat.getSize() && valid; i++){

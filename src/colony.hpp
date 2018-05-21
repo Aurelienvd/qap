@@ -17,6 +17,8 @@ class Colony {
 	public:
 
 		Colony(Instance* inst, int size, double initial_pheromone);
+
+		void initializeHeuristic();
 };
 
 #endif /* __COLONY_HPP */

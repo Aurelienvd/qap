@@ -9,3 +9,7 @@ Colony::Colony(Instance* inst, int size, double initial_pheromone): instance(ins
 
 	pheromones.setAllElem(initial_pheromone);
 }
+
+void Colony::initializeHeuristic(){
+	
+}

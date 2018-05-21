@@ -21,6 +21,10 @@ class Matrix {
 			return mat[i*size+j];
 		}
 
+		const std::vector<Num>getLine(int i) const{
+			return std::vector<Num>(mat.begin()+(i*size), mat.begin()+(i*size)+size);
+		}
+
 
 		void setElem(int i, int j, Num elem){
 			mat[i*size+j] = elem;
