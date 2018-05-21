@@ -6,6 +6,7 @@
 
 #Ignore exe
 src/qap
+src/unit
 
 # Ignore latex files
 *.aux
