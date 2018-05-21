@@ -3,6 +3,7 @@
 #include "matrix.hpp"
 #include "instance.hpp"
 #include "utils.hpp"
+#include "colony.hpp"
 
 void testMatrix(){
 	Matrix<int> mat(3);
@@ -51,9 +52,18 @@ void testInstance(){
 	}
 }
 
+void testColony(){
+	Instance instance("example.dat");
+	Colony colony(&instance, 10, 0.8);
+	colony.initializeHeuristic();
+
+	colony.getHeuristicMatrix().print();
+}
+
 int main(int argc, char** argv){
 	testMatrix();
 	testInstance();
+	testColony();
 	
 	return EXIT_SUCCESS;
 }
