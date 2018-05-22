@@ -66,11 +66,10 @@ void Ant::constructSolution(){
 	int facility, index;
 
 	for (unsigned int i = 0; i < instance->getSize(); i++){
-		index = std::uniform_int_distribution<>(0, unassignedFacilities.size())(*gen);
+		index = std::uniform_int_distribution<>(0, unassignedFacilities.size()-1)(*gen);
 		facility = unassignedFacilities[index];
 
 		assignFacility(facility, locationFree);
-
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
 }

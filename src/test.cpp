@@ -71,7 +71,7 @@ void testInstance(){
 
 void testColony(){
 	Instance instance("example.dat");
-	Colony colony(&instance, 1, 0.8, 1337);
+	Colony colony(&instance, 10, 0.8, 1337, 0.2);
 	colony.initializeHeuristic();
 	colony.computeProbabilities(1.0, 1.0);
 

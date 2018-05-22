@@ -1,7 +1,8 @@
 #include "colony.hpp"
 #include <iostream>
 
-Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed): instance(inst){
+Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed, double r): instance(inst), rho(r), bestScore(LONG_MAX), 
+																						   bestSolution(std::vector<int>(inst->getSize(), -1)){
 	auto rg = std::make_shared<std::mt19937>(seed);
 	for (int i = 0; i < size; i++){
 		ants.push_back(Ant(inst, rg, &probabilities, &heuristic));
@@ -44,6 +45,23 @@ void Colony::initializeHeuristic(){
 	}
 }
 
+void Colony::evaporatePheromones(){
+	for (unsigned int i = 0; i < instance->getSize(); i++){
+		for (unsigned int j = 0; j < instance->getSize(); j++){
+			pheromones.setElem(i,j,(1.0-rho)*pheromones.getElem(i,j));
+		}
+	}
+}
+
+void Colony::depositPheromones(long iterScore, const std::vector<int>& solution){
+	double delta = 1.0/iterScore;
+	int j = -1;
+	std::for_each(solution.begin(), solution.end(), [&j, this, &delta](const int &facility){
+		++j;
+		pheromones.setElem(facility, j, pheromones.getElem(facility, j)+delta);
+	});
+}
+
 void Colony::computeProbabilities(double alpha, double beta){
 	for (unsigned int i = 0; i < instance->getSize(); i++){
 		for (unsigned int j = 0; j < instance->getSize(); j++){
@@ -53,7 +71,23 @@ void Colony::computeProbabilities(double alpha, double beta){
 }
 
 void Colony::iterate(){
-	for (auto ant : ants){
-		ant.constructSolution();
+	Ant* bestAnt = nullptr;
+	long iterScore, currentScore = LONG_MAX;
+
+	for (auto ant = ants.begin(); ant != ants.end(); ++ant){
+		ant->constructSolution();
+		currentScore = instance->evaluateSolution(ant->getSolution());
+		if (currentScore < iterScore){
+			bestAnt = &(*ant);
+			iterScore = currentScore;
+		}
 	}
+
+	if (iterScore < bestScore){
+		bestScore = iterScore;
+		bestSolution = bestAnt->getSolution();
+	}
+
+	evaporatePheromones();
+	depositPheromones(iterScore, bestAnt->getSolution());
 }

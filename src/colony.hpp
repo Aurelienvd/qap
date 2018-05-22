@@ -4,6 +4,8 @@
 #include <vector>
 #include <numeric>
 #include <cmath>
+#include <climits>
+#include <algorithm>
 #include <random>
 #include "ant.hpp"
 #include "instance.hpp"
@@ -19,9 +21,17 @@ class Colony {
 		Matrix<double> heuristic;
 		Matrix<double> probabilities;
 
+		double rho;
+
+		long bestScore;
+		std::vector<int> bestSolution;
+
+		void evaporatePheromones();
+		void depositPheromones(long iterScore, const std::vector<int>& solution);
+
 	public:
 
-		Colony(Instance* inst, int size, double initial_pheromone, double seed);
+		Colony(Instance* inst, int size, double initial_pheromone, double seed, double r);
 
 		const Matrix<double>& getHeuristicMatrix() const;
 		const Matrix<double>& getProbabilitiesMatrix() const;

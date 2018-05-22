@@ -27,7 +27,7 @@ void Instance::readMatricesFromFile(std::string filename){
 	}
 }
 
-Table Instance::tableFromVector(std::vector<int>& assignment) const{
+Table Instance::tableFromVector(const std::vector<int>& assignment) const{
 	Table table;
 	for (unsigned int i = 0; i < assignment.size(); i++){
 		table[i] = assignment[i];
@@ -39,7 +39,7 @@ unsigned int Instance::getSize() const{
 	return distance.getSize();
 }
 
-long Instance::evaluateSolution(std::vector<int>& assignment) const{
+long Instance::evaluateSolution(const std::vector<int>& assignment) const{
 	Table mapping = tableFromVector(assignment);
 	long score = 0;
 	for (unsigned int i = 0; i < assignment.size(); i++){
