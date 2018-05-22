@@ -22,11 +22,14 @@ class Colony {
 		Matrix<double> probabilities;
 
 		double rho;
+		double lowerLimit;
+		double upperLimit;
 
 		long bestScore;
 		std::vector<int> bestSolution;
 
 		void evaporatePheromones();
+		void updateTrailLimits();
 		void depositPheromones(long iterScore, const std::vector<int>& solution);
 
 	public:

@@ -2,7 +2,7 @@
 #include <iostream>
 
 Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed, double r): instance(inst), rho(r), bestScore(LONG_MAX), 
-																						   bestSolution(std::vector<int>(inst->getSize(), -1)){
+                                                                                           bestSolution(std::vector<int>(inst->getSize(), -1)){
 	auto rg = std::make_shared<std::mt19937>(seed);
 	for (int i = 0; i < size; i++){
 		ants.push_back(Ant(inst, rg, &probabilities, &heuristic));
@@ -48,9 +48,14 @@ void Colony::initializeHeuristic(){
 void Colony::evaporatePheromones(){
 	for (unsigned int i = 0; i < instance->getSize(); i++){
 		for (unsigned int j = 0; j < instance->getSize(); j++){
-			pheromones.setElem(i,j,(1.0-rho)*pheromones.getElem(i,j));
+			pheromones.setElem(i,j,std::clamp((1.0-rho)*pheromones.getElem(i,j), lowerLimit, upperLimit));
 		}
 	}
+}
+
+void Colony::updateTrailLimits(){
+	upperLimit = (1.0/rho)*(1.0/bestScore);
+	lowerLimit = upperLimit/(2.0*instance->getSize());
 }
 
 void Colony::depositPheromones(long iterScore, const std::vector<int>& solution){
@@ -58,7 +63,7 @@ void Colony::depositPheromones(long iterScore, const std::vector<int>& solution)
 	int j = -1;
 	std::for_each(solution.begin(), solution.end(), [&j, this, &delta](const int &facility){
 		++j;
-		pheromones.setElem(facility, j, pheromones.getElem(facility, j)+delta);
+		pheromones.setElem(facility, j, std::clamp(pheromones.getElem(facility, j)+delta, lowerLimit, upperLimit));
 	});
 }
 
@@ -88,6 +93,7 @@ void Colony::iterate(){
 		bestSolution = bestAnt->getSolution();
 	}
 
+	updateTrailLimits();
 	evaporatePheromones();
 	depositPheromones(iterScore, bestAnt->getSolution());
 }
