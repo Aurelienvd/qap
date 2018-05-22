@@ -6,6 +6,7 @@
 #include "instance.hpp"
 #include "utils.hpp"
 #include "constants.hpp"
+#include "colony.hpp"
 
 
 struct Parameters{
@@ -23,6 +24,7 @@ struct Parameters{
 	}
 };
 
+// This function comes from the first practical session of the swarm intelligence course at ULB.
 Parameters parseArgs(int argc, char** argv){
 	Parameters params;
     for(int i=1; i< argc ; i++){
@@ -55,8 +57,35 @@ Parameters parseArgs(int argc, char** argv){
    return params;
 }
 
+bool terminationCondition(Parameters& params, int& tour, int& iter){
+	if (params.maxTours != 0 && tour >= params.maxTours){
+  		return(true);
+	}
+	if (params.maxIter !=0 && iter >= params.maxIter){
+		return(true);
+	}
+	return(false);
+}
+
+
 int main(int argc, char** argv){
 	auto params = parseArgs(argc, argv);
+	Instance instance(params.filename);
+	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho);
+	int tour, iter = 0;
+
+	colony.initializeHeuristic();
+	colony.computeProbabilities(params.alpha, params.beta);
+	while(!terminationCondition(params, tour, iter)){
+		colony.iterate();
+		tour += params.numAnts;
+
+		colony.computeProbabilities(params.alpha, params.beta);
+		iter++;
+	}
+
+	std::cout << "Best solution: " << colony.getBestScore() << std::endl;
+	printVec(colony.getBestSolution());
 
 	return EXIT_SUCCESS;
 }

@@ -26,6 +26,14 @@ const Matrix<double>& Colony::getPheromonesMatrix() const{
 	return pheromones;
 }
 
+const long Colony::getBestScore() const{
+	return bestScore;
+}
+
+const std::vector<int>& Colony::getBestSolution() const{
+	return bestSolution;
+}
+
 void Colony::initializeHeuristic(){
 	std::vector<int> total_flows(instance->getSize(), 0);
 	std::vector<int> total_distances(instance->getSize(), 0);
@@ -73,6 +81,10 @@ void Colony::computeProbabilities(double alpha, double beta){
 			probabilities.setElem(i,j, std::pow(pheromones.getElem(i,j), alpha)*std::pow(heuristic.getElem(i,j), beta));
 		}
 	}
+}
+
+void Colony::resetLimits(){
+	pheromones.setAllElem(upperLimit);
 }
 
 void Colony::iterate(){

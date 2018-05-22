@@ -39,9 +39,12 @@ class Colony {
 		const Matrix<double>& getHeuristicMatrix() const;
 		const Matrix<double>& getProbabilitiesMatrix() const;
 		const Matrix<double>& getPheromonesMatrix() const;
+		const long getBestScore() const;
+		const std::vector<int>& getBestSolution() const;
 
 		void initializeHeuristic();
 		void computeProbabilities(double alpha, double beta);
+		void resetLimits();
 		void iterate();
 };
 
