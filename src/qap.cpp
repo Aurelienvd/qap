@@ -57,7 +57,7 @@ Parameters parseArgs(int argc, char** argv){
    return params;
 }
 
-bool terminationCondition(Parameters& params, int& tour, int& iter){
+bool terminationCondition(Parameters params, int tour, int iter){
 	if (params.maxTours != 0 && tour >= params.maxTours){
   		return(true);
 	}
@@ -72,7 +72,8 @@ int main(int argc, char** argv){
 	auto params = parseArgs(argc, argv);
 	Instance instance(params.filename);
 	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho);
-	int tour, iter = 0;
+	int tour = 0;
+	int iter = 0;
 
 	colony.initializeHeuristic();
 	colony.computeProbabilities(params.alpha, params.beta);
