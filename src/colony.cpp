@@ -83,7 +83,7 @@ void Colony::computeProbabilities(double alpha, double beta){
 	}
 }
 
-void Colony::resetLimits(){
+void Colony::resetPheromones(){
 	pheromones.setAllElem(upperLimit);
 }
 

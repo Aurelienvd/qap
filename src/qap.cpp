@@ -7,6 +7,7 @@
 #include "utils.hpp"
 #include "constants.hpp"
 #include "colony.hpp"
+#include "bwascolony.hpp"
 
 
 struct Parameters{

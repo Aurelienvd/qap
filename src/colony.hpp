@@ -11,9 +11,13 @@
 #include "instance.hpp"
 #include "utils.hpp"
 
+/*
+* Class implementing a MINMAX Ant System.
+*/
+
 class Colony {
 
-	private:
+	protected:
 
 		Instance* instance;
 		std::vector<Ant> ants;
@@ -28,13 +32,14 @@ class Colony {
 		long bestScore;
 		std::vector<int> bestSolution;
 
-		void evaporatePheromones();
+		virtual void evaporatePheromones();
 		void updateTrailLimits();
 		void depositPheromones(long iterScore, const std::vector<int>& solution);
 
 	public:
 
 		Colony(Instance* inst, int size, double initial_pheromone, double seed, double r);
+		virtual ~Colony() = default;
 
 		const Matrix<double>& getHeuristicMatrix() const;
 		const Matrix<double>& getProbabilitiesMatrix() const;
@@ -44,8 +49,8 @@ class Colony {
 
 		void initializeHeuristic();
 		void computeProbabilities(double alpha, double beta);
-		void resetLimits();
-		void iterate();
+		virtual void resetPheromones();
+		virtual void iterate();
 };
 
 #endif /* __COLONY_HPP */
