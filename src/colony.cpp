@@ -3,9 +3,9 @@
 
 Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed, double r): instance(inst), rho(r), bestScore(LONG_MAX), 
                                                                                            bestSolution(std::vector<int>(inst->getSize(), -1)){
-	auto rg = std::make_shared<std::mt19937>(seed);
+	gen = std::make_shared<std::mt19937>(seed);
 	for (int i = 0; i < size; i++){
-		ants.push_back(Ant(inst, rg, &probabilities, &heuristic));
+		ants.push_back(Ant(inst, gen, &probabilities, &heuristic));
 	}
 	pheromones.resize(instance->getSize());
 	heuristic.resize(instance->getSize());
@@ -87,9 +87,10 @@ void Colony::resetPheromones(){
 	pheromones.setAllElem(upperLimit);
 }
 
-void Colony::iterate(){
+bool Colony::iterate(int iter, int iterRestart){
 	Ant* bestAnt = nullptr;
 	long iterScore, currentScore = LONG_MAX;
+	bool improved = false;
 
 	for (auto ant = ants.begin(); ant != ants.end(); ++ant){
 		ant->constructSolution();
@@ -103,9 +104,12 @@ void Colony::iterate(){
 	if (iterScore < bestScore){
 		bestScore = iterScore;
 		bestSolution = bestAnt->getSolution();
+		improved = true;
 	}
 
 	updateTrailLimits();
 	evaporatePheromones();
 	depositPheromones(iterScore, bestAnt->getSolution());
+
+	return improved;
 }

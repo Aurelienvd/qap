@@ -15,6 +15,8 @@ struct Parameters{
 	double beta = 0.8;
 	double alpha = 1.0;
 	double rho = 0.2;
+	double sigma = 4;
+	double mu = 0.05;
 	int maxIter = 0;
 	int maxTours = 10000;
 	std::string filename = "had14.dat";
@@ -41,6 +43,12 @@ Parameters parseArgs(int argc, char** argv){
        } else if(strcmp(argv[i], args::RHO) == 0) {
            params.rho = atof(argv[i+1]);
            i++;
+       } else if(strcmp(argv[i], args::SIGMA) == 0){
+       	   params.sigma = atof(argv[i+1]);
+       	   i++;
+       } else if(strcmp(argv[i], args::MU) == 0){
+       	   params.mu = atof(argv[i+1]);
+       	   i++;
        } else if(strcmp(argv[i], args::MAXITER) == 0) {
            params.maxIter = atol(argv[i+1]);
            i++;
@@ -75,11 +83,23 @@ int main(int argc, char** argv){
 	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho);
 	int tour = 0;
 	int iter = 0;
+	int maxIter = params.maxIter == 0 ? params.maxTours/params.numAnts : params.maxIter;
+	int iterLastRestart = 0;
+	int noImprovement = 0;
 
 	colony.initializeHeuristic();
 	colony.computeProbabilities(params.alpha, params.beta);
 	while(!terminationCondition(params, tour, iter)){
-		colony.iterate();
+		bool improved = colony.iterate(iter, iterLastRestart);
+		if (improved){
+			noImprovement = 0;
+		} else{
+			noImprovement += 1;
+			if (noImprovement == run::RESTART){
+				colony.resetPheromones();
+			}
+		}
+
 		tour += params.numAnts;
 
 		colony.computeProbabilities(params.alpha, params.beta);

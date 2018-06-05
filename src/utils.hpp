@@ -34,6 +34,14 @@ std::vector<T> scanl(InputIt first, InputIt last, T init, BinaryOperation op){
 	return res;
 }
 
+/*
+* Maps 0 to 1 and 1 to -1. Useful for the BWAS algorithm. Actually, it maps any non zero numeric to -1 but it will only be used with {0,1} values.
+*/
+template <typename T>
+int mapping01(T a){
+	return (a == 0 ? 1 : -1);
+}
+
 
 
 #endif /* __UTILS_HPP */

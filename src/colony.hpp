@@ -25,6 +25,8 @@ class Colony {
 		Matrix<double> heuristic;
 		Matrix<double> probabilities;
 
+		RandomGenerator gen;
+
 		double rho;
 		double lowerLimit;
 		double upperLimit;
@@ -50,7 +52,7 @@ class Colony {
 		void initializeHeuristic();
 		void computeProbabilities(double alpha, double beta);
 		virtual void resetPheromones();
-		virtual void iterate();
+		virtual bool iterate(int iter = 0, int iterRestart = 0);
 };
 
 #endif /* __COLONY_HPP */
