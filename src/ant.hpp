@@ -10,6 +10,7 @@
 #include "matrix.hpp"
 #include "instance.hpp"
 #include "utils.hpp"
+#include "tabu.hpp"
 
 typedef std::vector<int> Assignment;
 typedef std::shared_ptr<std::mt19937> RandomGenerator;

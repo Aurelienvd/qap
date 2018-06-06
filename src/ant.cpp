@@ -72,4 +72,5 @@ void Ant::constructSolution(){
 		assignFacility(facility, locationFree);
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
+	solution = RobustTabu::search(solution, instance, gen);
 }

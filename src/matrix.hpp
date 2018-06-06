@@ -30,6 +30,11 @@ class Matrix {
 			mat[i*size+j] = elem;
 		}
 
+		void setTriangularElem(int i, int j, Num elem){
+			setElem(i, j, elem);
+			setElem(j, i, elem);
+		}
+
 		void setAllElem(Num elem){
 			mat.assign(mat.size(), elem);
 		}
