@@ -8,9 +8,12 @@
 #include <climits>
 #include "matrix.hpp"
 #include "instance.hpp"
+#include "utils.hpp"
 
 /*
-* Robust Tabu Search based on paper published in 1990 by E. Talliard. deltaCost corresponds to Eq. 1 and fastDelta cost to Eq. 2 in said paper.
+* Robust Tabu Search based on paper published in 1990 by E. Talliard. deltaCost corresponds to Eq. 1 and fastDelta cost to Eq. 2 in said paper (extended to non-symmetrical case).
+* Note that solution is a vector of facility IDs. Hence, for simplicity, r and s correspond to location IDs, 
+* i.e. correspond to indices of the solution vector.
 */
 
 typedef unsigned int uint;
@@ -29,13 +32,13 @@ class RobustTabu{
 	private:
 
 		static Matrix<long> moveCost;
-		static Matrix<long> previousCost;
 		static Matrix<int> tabuList;
 		static Instance* instance;
 
 		static void deltaCost(uint r, uint s, std::vector<int> solution);
 		static void fastDeltaCost(uint u, uint v, uint r, uint s, std::vector<int> solution);
 		static void computeInitCosts(std::vector<int> solution);
+		static void computeCosts(std::vector<int> solution, Move lastMove);
 		static void initMatrices();
 		static bool isTabu(uint r, uint s, int tt, int iter, std::vector<int> solution);
 		static Move getBestMove(int iter, int tt, std::vector<int> solution, long bestScore, long currentScore);

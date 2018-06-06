@@ -8,14 +8,11 @@
 #include "matrix.hpp"
 #include "constants.hpp"
 
-typedef std::unordered_map<int, int> Table;
-
 class Instance{
 	
 	private:
 		void initMatrix(std::ifstream& in, Matrix<int>& mat, std::size_t n);
 		void readMatricesFromFile(std::string filename);
-		Table tableFromVector(const std::vector<int>& assignment) const;
 
 	public:
 		Matrix<int> distance;

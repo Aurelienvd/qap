@@ -27,24 +27,15 @@ void Instance::readMatricesFromFile(std::string filename){
 	}
 }
 
-Table Instance::tableFromVector(const std::vector<int>& assignment) const{
-	Table table;
-	for (unsigned int i = 0; i < assignment.size(); i++){
-		table[i] = assignment[i];
-	}
-	return table;
-}
-
 unsigned int Instance::getSize() const{
 	return distance.getSize();
 }
 
 long Instance::evaluateSolution(const std::vector<int>& assignment) const{
-	Table mapping = tableFromVector(assignment);
 	long score = 0;
 	for (unsigned int i = 0; i < assignment.size(); i++){
 		for (unsigned int j = 0; j < assignment.size(); j++){
-			score += flow.getElem(i, j)*distance.getElem(mapping[i], mapping[j]);
+			score += flow.getElem(assignment[i], assignment[j])*distance.getElem(i,j);
 		}
 	}
 	return score;
