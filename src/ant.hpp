@@ -33,7 +33,7 @@ class Ant{
 
 		Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h);
 
-		void constructSolution();
+		void constructSolution(long bestScore);
 		const Assignment& getSolution() const;
 };
 

@@ -93,7 +93,7 @@ bool Colony::iterate(int iter, int iterRestart){
 	bool improved = false;
 
 	for (auto ant = ants.begin(); ant != ants.end(); ++ant){
-		ant->constructSolution();
+		ant->constructSolution(bestScore);
 		currentScore = instance->evaluateSolution(ant->getSolution());
 		if (currentScore < iterScore){
 			bestAnt = &(*ant);

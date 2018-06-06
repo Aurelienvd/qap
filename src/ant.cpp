@@ -58,7 +58,7 @@ void Ant::assignFacility(int facility, std::vector<bool>& locationFree){
 	}
 }
 
-void Ant::constructSolution(){
+void Ant::constructSolution(long bestScore){
 	clearSolution();
 	std::vector<int> unassignedFacilities(instance->getSize(), -1);
 	std::vector<bool> locationFree(instance->getSize(), true);
@@ -72,5 +72,5 @@ void Ant::constructSolution(){
 		assignFacility(facility, locationFree);
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
-	solution = RobustTabu::search(solution, instance, gen);
+	solution = RobustTabu::search(solution, instance, gen, bestScore);
 }

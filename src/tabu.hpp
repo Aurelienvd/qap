@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <memory>
 #include <random>
+#include <climits>
 #include "matrix.hpp"
 #include "instance.hpp"
 
@@ -18,6 +19,8 @@ typedef std::shared_ptr<std::mt19937> RandomGenerator;
 struct Move{
 	uint r;
 	uint s;
+
+	Move(uint a, uint b): r(a), s(b) {}
 };	
 
 
@@ -34,13 +37,14 @@ class RobustTabu{
 		static void fastDeltaCost(uint u, uint v, uint r, uint s, std::vector<int> solution);
 		static void computeInitCosts(std::vector<int> solution);
 		static void initMatrices();
-		static bool isTaboo(int r, int s, int tt);
-		static Move getBestMove(int iter, int tt);
+		static bool isTabu(uint r, uint s, int tt, int iter, std::vector<int> solution);
+		static Move getBestMove(int iter, int tt, std::vector<int> solution, long bestScore, long currentScore);
+		static void updateTabuList(Move move, std::vector<int> solution, int iter);
 
 
 	public:
 
-		static std::vector<int> search(std::vector<int> solution, Instance* inst, RandomGenerator gen);
+		static std::vector<int> search(std::vector<int> solution, Instance* inst, RandomGenerator gen, long bestScore);
 
 
 
