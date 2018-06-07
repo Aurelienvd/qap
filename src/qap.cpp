@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <string>
 #include <string.h>
+#include <cmath>
+#include <cfloat>
 #include "matrix.hpp"
 #include "instance.hpp"
 #include "utils.hpp"
@@ -80,9 +82,7 @@ bool terminationCondition(Parameters params, int tour, int iter){
 	return(false);
 }
 
-
-int main(int argc, char** argv){
-	auto params = parseArgs(argc, argv);
+long runMMAS(Parameters params){
 	Instance instance(params.filename);
 	int maxIter = params.maxIter == 0 ? params.maxTours/params.numAnts : params.maxIter;
 	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho);
@@ -109,9 +109,48 @@ int main(int argc, char** argv){
 		colony.computeProbabilities(params.alpha, params.beta);
 	}
 
-	/*std::cout << "Best solution: " << colony.getBestScore() << std::endl;
-	printVec(colony.getBestSolution());*/
-	std::cout << colony.getBestScore() << std::endl;
+	return colony.getBestScore();
+}
+
+
+int main(int argc, char** argv){
+	auto params = parseArgs(argc, argv);
+	params.numAnts = 25;
+	params.beta = 1.1459;
+	params.alpha = 0.315;
+	params.rho = 0.4545;
+
+	std::vector<std::string> instances = {"bur26g.dat", "chr15b.dat", "esc16d.dat", "had14.dat", "had20.dat", "nug28.dat", "scr12.dat", "tai17a.dat", "tai35a.dat", "wil50.dat"};
+	std::vector<int> seeds = {265019260,692626528,125547936,1832295131,1318811903,170800164,233055788,1568515107,1004082759,119786407};
+	std::cout << "Instance, Best, Worst, Mean, SD\n" << std::endl;
+
+	for (unsigned int i = 0; i < instances.size(); i++){
+		std::cout << instances[i] << ",";
+		params.filename = instances[i];
+		double mean = 0.0;
+		double sd = 0.0;
+		double best = DBL_MAX;
+		double worst = DBL_MIN;
+		std::vector<long> scores;
+		for (unsigned int j = 0; j < seeds.size(); j++){
+			params.seed = seeds[j];
+			long score = runMMAS(params);
+			if (score < best){
+				best = score;
+			}
+			if (score > worst){
+				worst = score;
+			}
+			scores.push_back(score);
+			mean += score;
+		}
+		mean = mean/seeds.size();
+		for (unsigned int k = 0; k < seeds.size(); k++){
+			sd += pow((scores[k]-mean),2);
+		}
+		sd = sqrt(sd/(seeds.size()-1));
+		std::cout << best << "," << worst << "," << mean << "," << sd << std::endl;
+	}
 
 	return EXIT_SUCCESS;
 }

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <memory>
 #include <random>
+#include <cmath>
 #include <climits>
 #include "matrix.hpp"
 #include "instance.hpp"

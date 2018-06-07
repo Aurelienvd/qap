@@ -103,7 +103,7 @@ std::vector<int> RobustTabu::search(std::vector<int> solution, Instance* inst, R
 	initMatrices();
 	computeInitCosts(solution);
 	int iter = 0;
-	auto dis = std::uniform_int_distribution<>((int)(inst->getSize()*0.9), (int)(inst->getSize()*1.1));
+	auto dis = std::uniform_int_distribution<>((int)std::floor(inst->getSize()*0.9), (int)std::ceil(inst->getSize()*1.1));
 	int tt = dis(*gen);
 	bool stopped = false;
 	std::vector<int> bestSolution = solution;

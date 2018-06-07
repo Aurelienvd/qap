@@ -72,5 +72,5 @@ void Ant::constructSolution(long bestScore){
 		assignFacility(facility, locationFree);
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
-	//solution = RobustTabu::search(solution, instance, gen, bestScore);
+	solution = RobustTabu::search(solution, instance, gen, bestScore);
 }
