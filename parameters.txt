@@ -1,0 +1,5 @@
+# Name	Label/switch	Type	Domain sigma "--sigma " r (0.5, 8) mu "--mu " r (0.05,0.25)
+numAnts	"--ants " c	(5,10,15,20,25,30)
+beta	"--beta "	r	(0.2, 3.0)
+alpha	"--alpha "	r	(0.2, 3.0)
+rho	"--rho " r	(0.1,1.0)

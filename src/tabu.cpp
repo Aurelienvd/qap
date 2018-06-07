@@ -58,7 +58,6 @@ void RobustTabu::computeCosts(std::vector<int> solution, Move lastMove){
 			} else{
 				deltaCost(u, v, solution);
 			}
-			//deltaCost(u,v, solution);
 		}
 	}
 }
@@ -80,8 +79,6 @@ Move RobustTabu::getBestMove(int iter, int tt, std::vector<int> solution, long b
 
 	for (uint r = 0; r < instance->getSize(); r++){
 		for (uint s = r+1; s < instance->getSize(); s++){
-			std::cout << "Move: " << r << "," << s << std::endl;
-			std::cout << "Cost: " << moveCost.getElem(r, s) << std::endl;
 			if (!isTabu(r, s, tt, iter, solution) or (currentScore + moveCost.getElem(r, s) < bestScore)){
 				if (moveCost.getElem(r, s) < bestCost){
 					bestMove = Move(r, s);
@@ -113,7 +110,6 @@ std::vector<int> RobustTabu::search(std::vector<int> solution, Instance* inst, R
 
 	while (iter < 500 and !stopped){
 		auto move = getBestMove(iter, tt, solution, bestScore, currentScore);
-		std::cout << std::endl;
 		std::iter_swap(solution.begin()+move.r, solution.begin()+move.s);
 
 		currentScore = currentScore + moveCost.getElem(move.r, move.s);

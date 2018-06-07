@@ -23,7 +23,11 @@ struct Parameters{
 	int seed = 1337;
 
 	void print(){
-		std::cout << "ants: " << numAnts << std::endl;;
+		std::cout << "ants: " << numAnts << std::endl;
+		std::cout << "beta: " << beta << std::endl;
+		std::cout << "alpha: " << alpha << std::endl;
+		std::cout << "filename: " << filename << std::endl;
+		std::cout << "seed: " << seed << std::endl;
 	}
 };
 
@@ -80,10 +84,10 @@ bool terminationCondition(Parameters params, int tour, int iter){
 int main(int argc, char** argv){
 	auto params = parseArgs(argc, argv);
 	Instance instance(params.filename);
+	int maxIter = params.maxIter == 0 ? params.maxTours/params.numAnts : params.maxIter;
 	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho);
 	int tour = 0;
 	int iter = 0;
-	int maxIter = params.maxIter == 0 ? params.maxTours/params.numAnts : params.maxIter;
 	int iterLastRestart = 0;
 	int noImprovement = 0;
 
@@ -103,11 +107,11 @@ int main(int argc, char** argv){
 		tour += params.numAnts;
 
 		colony.computeProbabilities(params.alpha, params.beta);
-		iter++;
 	}
 
-	std::cout << "Best solution: " << colony.getBestScore() << std::endl;
-	printVec(colony.getBestSolution());
+	/*std::cout << "Best solution: " << colony.getBestScore() << std::endl;
+	printVec(colony.getBestSolution());*/
+	std::cout << colony.getBestScore() << std::endl;
 
 	return EXIT_SUCCESS;
 }

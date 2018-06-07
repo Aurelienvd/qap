@@ -1,0 +1,193 @@
+*******************************************************************************
+* irace: An implementation in R of Iterated Race
+* Version: 2.4.1844
+* Copyright (C) 2010-2017
+* Manuel Lopez-Ibanez     <manuel.lopez-ibanez@manchester.ac.uk>
+* Jeremie Dubois-Lacoste  
+* Leslie Perez Caceres    <leslie.perez.caceres@ulb.ac.be>
+*
+* This is free software, and you are welcome to redistribute it under certain
+* conditions.  See the GNU General Public License for details. There is NO
+* WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*
+* irace builds upon previous code from the race package:
+*
+* race: Racing methods for the selection of the best
+* Copyright (C) 2003 Mauro Birattari
+*******************************************************************************
+# installed at: /home/aurelien/R/x86_64-pc-linux-gnu-library/3.2/irace
+# called with: --scenario scenario.txt --parallel 4
+# 2018-06-07 00:58:54 DST: Initialization
+# Elitist race
+# Elitist new instances: 1
+# Elitist limit: 2
+# nbIterations: 4
+# minNbSurvival: 4
+# nbParameters: 4
+# seed: 1469874501
+# confidence level: 0.95
+# budget: 1000
+# mu: 5
+# deterministic: FALSE
+
+# 2018-06-07 00:58:54 DST: Iteration 1 of 4
+# experimentsUsedSoFar: 0
+# remainingBudget: 1000
+# currentBudget: 250
+# nbConfigurations: 41
+  Markers:
+     x No test is performed.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+                                                                   
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|      Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+|x|          1|         41|         16|    2726.000000|         41|00:00:02|   NA|  NA|    NA|
+|x|          2|         41|         16|    4119.000000|         82|00:00:07|+0.75|0.88|0.2407|
+|x|          3|         41|         16|    19780.00000|        123|00:00:19|+0.78|0.85|0.2279|
+|x|          4|         41|         16|    143496.0000|        164|00:00:03|+0.81|0.86|0.1910|
+|-|          5|         11|         16|    114848.4000|        205|00:00:00|+0.14|0.32|0.5768|
+|-|          6|          4|         16|    96868.33333|        216|00:00:01|+0.26|0.38|0.4894|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+Best configuration:          16    mean value:     96868.33333
+Description of the best configuration:
+   .ID. numAnts  beta alpha    rho .PARENT.
+16   16      30 2.264 1.394 0.5523       NA
+
+# 2018-06-07 00:59:29 DST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   numAnts   beta  alpha    rho
+16      30 2.2640 1.3940 0.5523
+34      25 1.8778 1.3759 0.6881
+37      30 2.7527 1.4110 0.4357
+36      25 2.6470 1.8564 0.2631
+# 2018-06-07 00:59:29 DST: Iteration 2 of 4
+# experimentsUsedSoFar: 216
+# remainingBudget: 784
+# currentBudget: 261
+# nbConfigurations: 40
+  Markers:
+     x No test is performed.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+                                                                   
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|      Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+|x|          7|         40|         64|    10882.00000|         40|00:00:02|   NA|  NA|    NA|
+|x|          5|         40|         64|    5570.000000|         76|00:00:00|+0.00|0.50|0.4875|
+|x|          1|         40|         66|    6394.000000|        112|00:00:02|+0.09|0.39|0.6228|
+|x|          4|         40|         66|    132908.5000|        148|00:00:03|+0.29|0.46|0.5251|
+|-|          6|         17|         34|    107737.6000|        184|00:00:03|-0.01|0.19|0.7505|
+|=|          3|         17|         16|    98774.33333|        197|00:00:07|+0.03|0.19|0.7380|
+|=|          2|         17|         16|    85451.14286|        210|00:00:02|+0.10|0.23|0.6802|
+|=|          8|         17|         16|    1348434.625|        227|00:00:02|+0.08|0.19|0.7098|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+Best configuration:          16    mean value:     1348434.625
+Description of the best configuration:
+   .ID. numAnts  beta alpha    rho .PARENT.
+16   16      30 2.264 1.394 0.5523       NA
+
+# 2018-06-07 00:59:55 DST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   numAnts   beta  alpha    rho
+16      30 2.2640 1.3940 0.5523
+34      25 1.8778 1.3759 0.6881
+66      30 2.2105 1.6361 0.5104
+55      25 2.1343 1.5357 0.4649
+# 2018-06-07 00:59:55 DST: Iteration 3 of 4
+# experimentsUsedSoFar: 443
+# remainingBudget: 557
+# currentBudget: 278
+# nbConfigurations: 34
+  Markers:
+     x No test is performed.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+                                                                   
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|      Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+|x|          9|         34|         16|    16.00000000|         34|00:00:02|   NA|  NA|    NA|
+|x|          1|         34|         84|    1370.000000|         64|00:00:01|+0.32|0.66|0.6213|
+|x|          6|         34|         16|    3236.666667|         94|00:00:03|+0.37|0.58|0.4688|
+|x|          7|         34|         16|    6664.500000|        124|00:00:02|+0.29|0.47|0.5891|
+|-|          3|         22|         16|    15552.00000|        154|00:00:14|-0.09|0.13|1.0217|
+|=|          5|         22|         16|    13003.00000|        172|00:00:00|-0.07|0.11|0.8402|
+|=|          4|         22|         16|    84666.00000|        190|00:00:01|-0.06|0.09|0.8657|
+|=|          8|         22|         79|    1342267.625|        208|00:00:02|-0.05|0.08|0.8741|
+|=|          2|         22|         79|    1193739.000|        226|00:00:03|-0.01|0.10|0.8646|
+|=|         10|         22|         79|    1077579.500|        248|00:00:01|+0.03|0.13|0.8305|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+Best configuration:          79    mean value:     1077579.500
+Description of the best configuration:
+   .ID. numAnts   beta alpha    rho .PARENT.
+79   79      25 1.7122 1.405 0.6115       34
+
+# 2018-06-07 01:00:29 DST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+   numAnts   beta  alpha    rho
+79      25 1.7122 1.4050 0.6115
+16      30 2.2640 1.3940 0.5523
+55      25 2.1343 1.5357 0.4649
+66      30 2.2105 1.6361 0.5104
+# 2018-06-07 01:00:29 DST: Iteration 4 of 4
+# experimentsUsedSoFar: 691
+# remainingBudget: 309
+# currentBudget: 309
+# nbConfigurations: 31
+  Markers:
+     x No test is performed.
+     - The test is performed and some configurations are discarded.
+     = The test is performed but no configuration is discarded.
+     ! The test is performed and configurations could be discarded but elite configurations are preserved.
+                                                                   
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+| |   Instance|      Alive|       Best|      Mean best| Exp so far|  W time|  rho|KenW|  Qvar|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+|x|         11|         31|         55|    2592142.000|         31|00:00:07|   NA|  NA|    NA|
+|x|          9|         31|         55|    1296079.000|         58|00:00:02|+0.32|0.66|0.5756|
+|x|          6|         31|        108|    874042.0000|         85|00:00:02|+0.15|0.43|0.6922|
+|x|          1|         31|        108|    656213.5000|        112|00:00:01|+0.11|0.33|0.6994|
+|=|          4|         31|         55|    623890.8000|        139|00:00:02|+0.07|0.25|0.7794|
+|=|          8|         31|         55|    2212184.833|        166|00:00:04|+0.07|0.22|0.7701|
+|-|          2|         26|         66|    1898280.286|        193|00:00:04|-0.07|0.08|1.0070|
+|=|         10|         26|         79|    1669953.625|        215|00:00:01|-0.04|0.09|0.9680|
+|=|          5|         26|         79|    1484431.889|        237|00:00:00|-0.04|0.08|0.8597|
+|=|          3|         26|         79|    1341097.700|        259|00:00:10|-0.02|0.08|0.8541|
+|=|          7|         26|        115|    1216988.636|        281|00:00:01|+0.01|0.10|0.8494|
+|=|         12|         26|        115|    1115594.417|        307|00:00:00|+0.01|0.09|0.7807|
++-+-----------+-----------+-----------+---------------+-----------+--------+-----+----+------+
+Best configuration:         115    mean value:     1115594.417
+Description of the best configuration:
+    .ID. numAnts  beta  alpha    rho .PARENT.
+115  115      25 1.753 1.4872 0.5819       79
+
+# 2018-06-07 01:01:09 DST: Elite configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    numAnts   beta  alpha    rho
+115      25 1.7530 1.4872 0.5819
+79       25 1.7122 1.4050 0.6115
+66       30 2.2105 1.6361 0.5104
+119      25 1.7635 1.6104 0.5446
+# 2018-06-07 01:01:09 DST: Stopped because there is not enough budget left to race more than the minimum (4)
+# You may either increase the budget or set 'minNbSurvival' to a lower value
+# Iteration: 5
+# nbIterations: 5
+# experimentsUsedSoFar: 998
+# timeUsed: 0
+# remainingBudget: 2
+# currentBudget: 2
+# number of elites: 4
+# nbConfigurations: 3
+# Best configurations (first number is the configuration ID; listed from best to worst according to the sum of ranks):
+    numAnts   beta  alpha    rho
+115      25 1.7530 1.4872 0.5819
+79       25 1.7122 1.4050 0.6115
+66       30 2.2105 1.6361 0.5104
+119      25 1.7635 1.6104 0.5446
+# Best configurations as commandlines (first number is the configuration ID; same order as above):
+115  --ants 25 --beta 1.753 --alpha 1.4872 --rho 0.5819
+79   --ants 25 --beta 1.7122 --alpha 1.405 --rho 0.6115
+66   --ants 30 --beta 2.2105 --alpha 1.6361 --rho 0.5104
+119  --ants 25 --beta 1.7635 --alpha 1.6104 --rho 0.5446
