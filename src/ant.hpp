@@ -25,13 +25,15 @@ class Ant{
 		Matrix<double>* probabilities;
 		Matrix<double>* heuristic;
 
+		bool locals;
+
 		void clearSolution();
 		void assignBestLocation(int facility, std::vector<bool>& locationFree);
 		void assignFacility(int facility, std::vector<bool>& locationFree);
 
 	public:
 
-		Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h);
+		Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h, bool ls);
 
 		void constructSolution(long bestScore);
 		const Assignment& getSolution() const;

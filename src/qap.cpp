@@ -20,9 +20,11 @@ struct Parameters{
 	double sigma = 4;
 	double mu = 0.05;
 	int maxIter = 0;
-	int maxTours = 10000;
+	int maxTours = 2000;
 	std::string filename = "had14.dat";
 	int seed = 1337;
+	bool ls = false;
+	bool mmas = true;
 
 	void print(){
 		std::cout << "ants: " << numAnts << std::endl;
@@ -67,6 +69,12 @@ Parameters parseArgs(int argc, char** argv){
        }else if(strcmp(argv[i], args::FILENAME) == 0) {
            params.filename = argv[i+1];
            i++;
+       } else if(strcmp(argv[i], args::LS) == 0){
+       	   params.ls = true;
+       	   i++;
+       } else if(strcmp(argv[i], args::BWAS) == 0){
+       	   params.mmas = false;
+       	   i++;
        }
    }
    return params;
@@ -82,10 +90,9 @@ bool terminationCondition(Parameters params, int tour, int iter){
 	return(false);
 }
 
-long runMMAS(Parameters params){
+void runMMAS(Parameters params){
 	Instance instance(params.filename);
-	int maxIter = params.maxIter == 0 ? params.maxTours/params.numAnts : params.maxIter;
-	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho);
+	Colony colony(&instance, params.numAnts, 1.0, params.seed, params.rho, params.ls);
 	int tour = 0;
 	int iter = 0;
 	int iterLastRestart = 0;
@@ -109,47 +116,49 @@ long runMMAS(Parameters params){
 		colony.computeProbabilities(params.alpha, params.beta);
 	}
 
-	return colony.getBestScore();
+	std::cout << "Best solution, cost: " << colony.getBestScore() << std::endl;
+	printVec(colony.getBestSolution());
+}
+
+void runBWAS(Parameters params){
+	Instance instance(params.filename);
+	int maxIter = params.maxIter == 0 ? params.maxTours/params.numAnts : params.maxIter;
+	BWColony colony(&instance, params.numAnts, 1.0, params.seed, params.rho, maxIter, params.sigma, params.mu);
+	int tour = 0;
+	int iter = 0;
+	int iterLastRestart = 0;
+	int noImprovement = 0;
+
+	colony.initializeHeuristic();
+	colony.computeProbabilities(params.alpha, params.beta);
+	while(!terminationCondition(params, tour, iter)){
+		bool improved = colony.iterate(iter, iterLastRestart);
+		if (improved){
+			noImprovement = 0;
+		} else{
+			noImprovement += 1;
+			if (noImprovement == run::RESTART){
+				colony.resetPheromones();
+			}
+		}
+
+		tour += params.numAnts;
+
+		colony.computeProbabilities(params.alpha, params.beta);
+	}
+
+	std::cout << "Best solution, cost: " << colony.getBestScore() << std::endl;
+	printVec(colony.getBestSolution());
 }
 
 
 int main(int argc, char** argv){
 	auto params = parseArgs(argc, argv);
-	params.numAnts = 25;
-	params.beta = 1.1459;
-	params.alpha = 0.315;
-	params.rho = 0.4545;
 
-	std::vector<std::string> instances = {"bur26g.dat", "chr15b.dat", "esc16d.dat", "had14.dat", "had20.dat", "nug28.dat", "scr12.dat", "tai17a.dat", "tai35a.dat", "wil50.dat"};
-	std::vector<int> seeds = {265019260,692626528,125547936,1832295131,1318811903,170800164,233055788,1568515107,1004082759,119786407};
-	std::cout << "Instance, Best, Worst, Mean, SD\n" << std::endl;
-
-	for (unsigned int i = 0; i < instances.size(); i++){
-		std::cout << instances[i] << ",";
-		params.filename = instances[i];
-		double mean = 0.0;
-		double sd = 0.0;
-		double best = DBL_MAX;
-		double worst = DBL_MIN;
-		std::vector<long> scores;
-		for (unsigned int j = 0; j < seeds.size(); j++){
-			params.seed = seeds[j];
-			long score = runMMAS(params);
-			if (score < best){
-				best = score;
-			}
-			if (score > worst){
-				worst = score;
-			}
-			scores.push_back(score);
-			mean += score;
-		}
-		mean = mean/seeds.size();
-		for (unsigned int k = 0; k < seeds.size(); k++){
-			sd += pow((scores[k]-mean),2);
-		}
-		sd = sqrt(sd/(seeds.size()-1));
-		std::cout << best << "," << worst << "," << mean << "," << sd << std::endl;
+	if(params.mmas){
+		runMMAS(params);
+	} else{
+		runBWAS(params);
 	}
 
 	return EXIT_SUCCESS;

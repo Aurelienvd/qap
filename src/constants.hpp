@@ -16,6 +16,8 @@ namespace args{
 	extern const char* MAXTOUR;
 	extern const char* FILENAME;
 	extern const char* SEED;
+	extern const char* LS;
+	extern const char* BWAS;
 }
 
 namespace run{

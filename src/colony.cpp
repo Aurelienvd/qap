@@ -1,11 +1,11 @@
 #include "colony.hpp"
 #include <iostream>
 
-Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed, double r): instance(inst), rho(r), bestScore(LONG_MAX), 
-                                                                                           bestSolution(std::vector<int>(inst->getSize(), -1)){
+Colony::Colony(Instance* inst, int size, double initial_pheromone, double seed, double r, bool ls): instance(inst), rho(r), bestScore(LONG_MAX), 
+                                                                                                    bestSolution(std::vector<int>(inst->getSize(), -1)){
 	gen = std::make_shared<std::mt19937>(seed);
 	for (int i = 0; i < size; i++){
-		ants.push_back(Ant(inst, gen, &probabilities, &heuristic));
+		ants.push_back(Ant(inst, gen, &probabilities, &heuristic, ls));
 	}
 	pheromones.resize(instance->getSize());
 	heuristic.resize(instance->getSize());

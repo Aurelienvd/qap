@@ -13,6 +13,8 @@ namespace args{
 	const char* MAXTOUR = "--tour";
 	const char* FILENAME = "--instance";
 	const char* SEED = "--seed";
+	const char* LS = "--ls";
+	const char* BWAS = "--bwas";
 }
 
 namespace run{

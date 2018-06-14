@@ -40,7 +40,7 @@ class Colony {
 
 	public:
 
-		Colony(Instance* inst, int size, double initial_pheromone, double seed, double r);
+		Colony(Instance* inst, int size, double initial_pheromone, double seed, double r, bool ls);
 		virtual ~Colony() = default;
 
 		const Matrix<double>& getHeuristicMatrix() const;

@@ -1,6 +1,6 @@
 #include "ant.hpp"
 
-Ant::Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h): instance(inst), gen(rg), probabilities(proba), heuristic(h){
+Ant::Ant(Instance* inst, RandomGenerator rg, Matrix<double>* proba, Matrix<double>* h, bool ls): instance(inst), gen(rg), probabilities(proba), heuristic(h), locals(ls){
 	solution.resize(instance->getSize());
 }
 
@@ -72,5 +72,8 @@ void Ant::constructSolution(long bestScore){
 		assignFacility(facility, locationFree);
 		unassignedFacilities.erase(unassignedFacilities.begin()+index);
 	}
-	solution = RobustTabu::search(solution, instance, gen, bestScore);
+
+	if(locals){
+		solution = RobustTabu::search(solution, instance, gen, bestScore);
+	}
 }

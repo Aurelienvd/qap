@@ -1,7 +1,7 @@
 #include "bwascolony.hpp"
 
 BWColony::BWColony(Instance* inst, int size, double initial_pheromone, double seed, double r, int nt, double s, double mu): 
-                   Colony(inst, size, initial_pheromone, seed, r), p0(initial_pheromone), nt(nt), sigma(s), mu(mu) {
+                   Colony(inst, size, initial_pheromone, seed, r, false), p0(initial_pheromone), nt(nt), sigma(s), mu(mu) {
 }
 
 void BWColony::resetPheromones(){
